@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tio Baseball Scoresheet v2-r3</title>
+<title>Tio Baseball Scoresheet v2-r4</title>
 <style>
   /* v2: same visual language as r6, but zero CDN dependencies.
      System font stacks replace the Google Fonts import so the file
@@ -632,6 +632,31 @@
     padding: 5px; cursor: pointer; color: var(--ink); font-family: var(--font-mono);
   }
   .hand-opt:hover { background: #5a3a1a; color: white; border-color: #3a2a10; }
+
+  /* Small screens: a scoresheet is inherently wide, so the goal is
+     usable — compact chrome, smooth horizontal scrolling, tappable UI */
+  @media (max-width: 700px) {
+    body { padding: 8px; }
+    .scoresheet { border-width: 2px; box-shadow: 3px 3px 0 rgba(0,0,0,0.4); }
+    .header { flex-direction: column; align-items: stretch; gap: 8px; padding: 10px 12px; }
+    .header-title { font-size: 18px; }
+    .game-meta { flex-wrap: wrap; gap: 8px 14px; }
+    .meta-input { font-size: 14px; }
+    .mlb-picker { gap: 6px; padding: 8px; }
+    .mlb-label { font-size: 12px; }
+    .mlb-select { max-width: 100%; font-size: 11px; }
+    .mlb-btn { padding: 8px 12px; font-size: 12px; } /* bigger touch target */
+    .sheet-scroll { -webkit-overflow-scrolling: touch; }
+    /* slightly roomier grid on touch screens */
+    .inning-header-row, .player-row, .linescore-inner {
+      grid-template-columns: 120px repeat(var(--ninn), minmax(46px, 1fr)) 36px 36px 36px 36px;
+    }
+    .ab-cell { min-height: 52px; }
+    .ab-modal { width: 96vw; }
+    .diamond-selector { width: 120px; height: 120px; }
+    .result-btn { padding: 8px 10px; font-size: 12px; } /* bigger touch target */
+    .legend { font-size: 9px; gap: 8px; padding: 6px 10px; }
+  }
 
   @media print {
     @page { size: landscape; margin: 8mm; }
